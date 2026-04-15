@@ -19,5 +19,5 @@ export class CreateUserDto {
 
   @IsInt()
   @IsPositive()
-  empresaId: number;
+  companyId: number;
 }

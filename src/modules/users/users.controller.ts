@@ -17,21 +17,21 @@ export class UsersController {
 
   @Get()
   findAll(@CurrentUser() user: JwtUser) {
-    return this.usersService.findAll(user.empresaId);
+    return this.usersService.findAll(user.companyId);
   }
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number, @CurrentUser() user: JwtUser) {
-    return this.usersService.findOne(id, user.empresaId);
+    return this.usersService.findOne(id, user.companyId);
   }
 
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateUserDto, @CurrentUser() user: JwtUser) {
-    return this.usersService.update(id, user.empresaId, dto);
+    return this.usersService.update(id, user.companyId, dto);
   }
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number, @CurrentUser() user: JwtUser) {
-    return this.usersService.remove(id, user.empresaId);
+    return this.usersService.remove(id, user.companyId);
   }
 }

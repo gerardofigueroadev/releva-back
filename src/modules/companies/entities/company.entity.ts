@@ -1,25 +1,25 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity('empresas')
-export class Empresa {
+@Entity('companies')
+export class Company {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ length: 150 })
-  nombre: string;
+  name: string;
 
-  @Column({ length: 20, nullable: true, unique: true })
-  ruc: string;
+  @Column({ name: 'tax_id', length: 20, nullable: true, unique: true })
+  taxId: string;
 
   @Column({ length: 20, default: 'trial' })
   plan: string;
 
-  @Column({ default: true })
+  @Column({ name: 'is_active', default: true })
   isActive: boolean;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }

@@ -12,7 +12,7 @@ export class CreateUsers1710000002000 implements MigrationInterface {
           { name: 'password', type: 'varchar', length: '255', isNullable: false },
           { name: 'is_active', type: 'boolean', isNullable: false, default: true },
           { name: 'role_id', type: 'integer', isNullable: false },
-          { name: 'empresa_id', type: 'integer', isNullable: false },
+          { name: 'company_id', type: 'integer', isNullable: false },
           { name: 'created_at', type: 'timestamp with time zone', isNullable: false, default: 'now()' },
           { name: 'updated_at', type: 'timestamp with time zone', isNullable: false, default: 'now()' },
         ],
@@ -20,30 +20,24 @@ export class CreateUsers1710000002000 implements MigrationInterface {
       true,
     );
 
-    await queryRunner.createForeignKey(
-      'users',
-      new TableForeignKey({
-        name: 'FK_users_role',
-        columnNames: ['role_id'],
-        referencedTableName: 'roles',
-        referencedColumnNames: ['id'],
-      }),
-    );
+    await queryRunner.createForeignKey('users', new TableForeignKey({
+      name: 'FK_users_role',
+      columnNames: ['role_id'],
+      referencedTableName: 'roles',
+      referencedColumnNames: ['id'],
+    }));
 
-    await queryRunner.createForeignKey(
-      'users',
-      new TableForeignKey({
-        name: 'FK_users_empresa',
-        columnNames: ['empresa_id'],
-        referencedTableName: 'empresas',
-        referencedColumnNames: ['id'],
-        onDelete: 'CASCADE',
-      }),
-    );
+    await queryRunner.createForeignKey('users', new TableForeignKey({
+      name: 'FK_users_company',
+      columnNames: ['company_id'],
+      referencedTableName: 'companies',
+      referencedColumnNames: ['id'],
+      onDelete: 'CASCADE',
+    }));
   }
 
   async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('users', 'FK_users_empresa');
+    await queryRunner.dropForeignKey('users', 'FK_users_company');
     await queryRunner.dropForeignKey('users', 'FK_users_role');
     await queryRunner.dropTable('users');
   }
