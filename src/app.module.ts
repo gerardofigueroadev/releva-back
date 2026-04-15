@@ -7,6 +7,7 @@ import { CompaniesModule } from './modules/companies/companies.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { CreditPackagesModule } from './modules/credit-packages/credit-packages.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AuthModule } from './modules/auth/auth.module';
     RolesModule,
     UsersModule,
     AuthModule,
+    CreditPackagesModule,
   ],
 })
 export class AppModule {}

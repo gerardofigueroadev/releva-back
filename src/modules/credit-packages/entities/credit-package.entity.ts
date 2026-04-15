@@ -1,21 +1,18 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity('companies')
-export class Company {
+@Entity('credit_packages')
+export class CreditPackage {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 150 })
+  @Column({ length: 100 })
   name: string;
 
-  @Column({ name: 'tax_id', length: 20, nullable: true, unique: true })
-  taxId: string;
-
-  @Column({ length: 20, default: 'trial' })
-  plan: string;
-
-  @Column({ default: 0 })
+  @Column()
   credits: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  price: number;
 
   @Column({ name: 'is_active', default: true })
   isActive: boolean;

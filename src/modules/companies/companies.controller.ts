@@ -3,6 +3,13 @@ import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { IsInt, Min } from 'class-validator';
+
+class AddCreditsDto {
+  @IsInt()
+  @Min(1)
+  amount: number;
+}
 
 @UseGuards(JwtAuthGuard)
 @Controller('companies')
@@ -32,5 +39,10 @@ export class CompaniesController {
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.companiesService.remove(id);
+  }
+
+  @Post(':id/credits')
+  addCredits(@Param('id', ParseIntPipe) id: number, @Body() dto: AddCreditsDto) {
+    return this.companiesService.addCredits(id, dto.amount);
   }
 }

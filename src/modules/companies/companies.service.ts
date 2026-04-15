@@ -41,4 +41,10 @@ export class CompaniesService {
     const company = await this.findOne(id);
     await this.companiesRepository.remove(company);
   }
+
+  async addCredits(id: number, amount: number): Promise<Company> {
+    const company = await this.findOne(id);
+    company.credits = (company.credits ?? 0) + amount;
+    return this.companiesRepository.save(company);
+  }
 }
