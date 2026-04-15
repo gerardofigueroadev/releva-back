@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Role } from '../../roles/entities/role.entity';
+import { Empresa } from '../../empresas/entities/empresa.entity';
 
 @Entity('users')
 export class User {
@@ -18,6 +19,10 @@ export class User {
   @ManyToOne(() => Role, { eager: true, nullable: false })
   @JoinColumn({ name: 'role_id' })
   role: Role;
+
+  @ManyToOne(() => Empresa, { eager: true, nullable: false })
+  @JoinColumn({ name: 'empresa_id' })
+  empresa: Empresa;
 
   @Column({ default: true })
   isActive: boolean;
